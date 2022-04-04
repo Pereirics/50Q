@@ -609,8 +609,128 @@ void addTo(int N, int M, int a[N][M], int b[N][M]){
 
 //42.
 int unionSet(int N, int v1[N], int v2[N], int r[N]){
-
+    int cont = 0;
+    for (int i = 0; i < N; i++) {
+        if (v1[i] == 1 || v2[i] == 1) r[i] = 1, cont++;
+    }
+    return cont;
 }
+
+
+//43.
+int intersectSet(int N, int v1[N], int v2[N], int r[N]){
+    int cont = 0;
+    for (int i = 0; i < N; i++) {
+        if (v1[i] == 1 && v2[i] == 1) r[i] = 1, cont++;
+    }
+    return cont;
+}
+
+
+//44.
+int intersectMSet(int N, int v1[N], int v2[N], int r[N]){
+    int cont = 0;
+    for (int i = 0; i < N; i++) {
+        if (v1[i] > 0 && v2[i] > 0){
+           if (v1[i] < v2[i]) r[i] = v1[i];
+           else r[i] = v2[i];
+           cont++;
+        }
+    }
+    return cont;
+}
+
+
+//45.
+int unionMSet(int N, int v1[N], int v2[N], int r[N]){
+    int cont = 0;
+    for (int i = 0; i < N; i++) {
+        if (v1[i] > 0 || v2[i] > 0){
+            if (v1[i] > v2[i]) r[i] = v1[i];
+            else r[i] = v2[i];
+            cont++;
+        }
+    }
+    return cont;
+}
+
+
+//46.
+int cardinalMSet(int N, int v[N]){
+    int cont = 0;
+    for (int i = 0; i < N; i++) {
+        cont += v[i];
+    }
+    return cont;
+}
+
+
+typedef enum movimento {Norte, Oeste, Sul, Este} Movimento;
+typedef struct posicao {
+    int x, y;
+} Posicao;
+
+
+//47.
+Posicao posFinal (Posicao inicial, Movimento mov[], int N){
+    for (int i = 0; i < N; i++) {
+        if (mov[i] == Norte) inicial.y += 1;
+        else if (mov[i] == Sul) inicial.y -= 1;
+        else if (mov[i] == Este) inicial.x += 1;
+        else inicial.x -= 1;
+    }
+    return inicial;
+}
+
+
+//48.
+int caminho (Posicao inicial, Posicao final, Movimento mov[], int N){
+    int i = 0;
+    while (N > 0){
+        if (inicial.x > final.x) mov[i++] = Oeste, inicial.x -= 1;
+        else if (inicial.x < final.x) mov[i++] = Este, inicial.x += 1;
+        else if (inicial.y < final.y) mov[i++] = Norte, inicial.y += 1;
+        else if (inicial.y > final.y) mov[i++] = Sul, inicial.y -= 1;
+        N--;
+    }
+    if (inicial.x == final.x || inicial.y == final.y) return i;
+    else return -1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 int main () {
