@@ -686,15 +686,41 @@ Posicao posFinal (Posicao inicial, Movimento mov[], int N){
 //48.
 int caminho (Posicao inicial, Posicao final, Movimento mov[], int N){
     int i = 0;
-    while (N > 0){
-        if (inicial.x > final.x) mov[i++] = Oeste, inicial.x -= 1;
-        else if (inicial.x < final.x) mov[i++] = Este, inicial.x += 1;
-        else if (inicial.y < final.y) mov[i++] = Norte, inicial.y += 1;
-        else if (inicial.y > final.y) mov[i++] = Sul, inicial.y -= 1;
-        N--;
+    for(i = 0; i < N; i++){
+        if (inicial.x > final.x) mov[i] = Oeste, inicial.x--;
+        else if (inicial.x < final.x) mov[i] = Este, inicial.x++;
+        else if (inicial.y < final.y) mov[i] = Norte, inicial.y++;
+        else if (inicial.y > final.y) mov[i] = Sul, inicial.y--;
+        else return i;
     }
-    if (inicial.x == final.x || inicial.y == final.y) return i;
+    if (inicial.x == final.x && inicial.y == final.y) return i;
     else return -1;
+}
+
+
+//49.
+int maisCentral (Posicao pos[], int N){
+    int menor = pos[0].x*pos[0].x + pos[0].y*pos[0].y;
+    int indice = 0;
+    for (int i = 0; i < N; i++) {
+        if (pos[i].x*pos[i].x + pos[i].y*pos[i].y < menor){
+            menor = pos[i].x*pos[i].x + pos[i].y*pos[i].y;
+            indice = i;
+        }
+    }
+    return indice;
+}
+
+
+//50.
+int vizinhos(Posicao p, Posicao pos[], int N){
+    int cont = 0;
+    for (int i = 0; i < N; i++) {
+        if (pos[i].x == p.x+1 && pos[i].y == p.y || pos[i].x == p.x && pos[i].y == p.y+1
+         || pos[i].x == p.x && pos[i].y == p.y-1 || pos[i].x == p.x-1 && pos[i].y == p.y)
+            cont ++;
+    }
+    return cont;
 }
 
 
